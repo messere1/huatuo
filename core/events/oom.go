@@ -17,6 +17,7 @@ package events
 import (
 	"context"
 	"fmt"
+	"os"
 	"sync"
 	"time"
 
@@ -41,6 +42,12 @@ type perfEventData struct {
 	VictimPid       int32
 	TriggerMemcgCSS uint64
 	VictimMemcgCSS  uint64
+	// MemLimitPages is oom_control.totalpages: the upper bound of the OOM
+	// domain in pages (memcg limit + swap for memcg OOM, system total for
+	// global OOM). MemUsagePages is the memcg usage counter at kill time,
+	// 0 for global OOM.
+	MemLimitPages uint64
+	MemUsagePages uint64
 }
 
 type OOMActor struct {
@@ -53,9 +60,11 @@ type OOMActor struct {
 }
 
 type OOMTracingData struct {
-	Trigger        OOMActor           `json:"trigger"`
-	Victim         OOMActor           `json:"victim"`
-	MemorySnapshot *OOMMemorySnapshot `json:"memory_snapshot,omitempty"`
+	Trigger           OOMActor           `json:"trigger"`
+	Victim            OOMActor           `json:"victim"`
+	CgroupMemoryLimit uint64             `json:"cgroup_memory_limit"`
+	CgroupMemoryUsage uint64             `json:"cgroup_memory_usage"`
+	MemorySnapshot    *OOMMemorySnapshot `json:"memory_snapshot,omitempty"`
 }
 
 type oomMetric struct {
@@ -175,6 +184,7 @@ func (c *oomCollector) Start(ctx context.Context) error {
 
 func buildTracingData(data perfEventData, containers map[string]*pod.Container, cgroup cgroups.Cgroup) *OOMTracingData {
 	cssContainers := pod.BuildCssContainersID(containers, subsystem.SubsystemMemory)
+	pageSize := uint64(os.Getpagesize())
 
 	triggerID := cssContainers[data.TriggerMemcgCSS]
 	victimID := cssContainers[data.VictimMemcgCSS]
@@ -192,6 +202,8 @@ func buildTracingData(data perfEventData, containers map[string]*pod.Container, 
 			Pid:                 data.VictimPid,
 			Comm:                bytesutil.ToStr(data.VictimComm[:]),
 		},
+		CgroupMemoryLimit: data.MemLimitPages * pageSize,
+		CgroupMemoryUsage: data.MemUsagePages * pageSize,
 	}
 
 	if container, ok := containers[triggerID]; ok {
