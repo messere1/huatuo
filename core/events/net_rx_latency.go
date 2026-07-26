@@ -21,6 +21,7 @@ import (
 	"strings"
 	"syscall"
 	"time"
+	"unsafe"
 
 	"huatuo-bamai/internal/bpf"
 	"huatuo-bamai/internal/log"
@@ -76,8 +77,20 @@ type netRcvPerfEvent struct {
 	_                  [2]byte
 	NetdevName         [bpf.NetdevNameLen]byte
 	NetNamespaceInode  uint32
+	_                  [4]byte // C alignment padding before net_cookie
 	NetNamespaceCookie uint64
 }
+
+// binary.Read walks the Go fields back to back, so every implicit hole in
+// struct perf_event_t (bpf/net_rx_latency.c) has to be mirrored explicitly.
+// Pin the offsets that follow the padding as well: a size check alone would
+// still pass if a future field swapped places with the hole.
+var (
+	_ = [1]struct{}{}[96-unsafe.Sizeof(netRcvPerfEvent{})]
+	_ = [1]struct{}{}[64-unsafe.Offsetof(netRcvPerfEvent{}.NetdevName)]
+	_ = [1]struct{}{}[80-unsafe.Offsetof(netRcvPerfEvent{}.NetNamespaceInode)]
+	_ = [1]struct{}{}[88-unsafe.Offsetof(netRcvPerfEvent{}.NetNamespaceCookie)]
+)
 
 var latStageNames = []string{
 	"RX_STAGE_NETIF",
