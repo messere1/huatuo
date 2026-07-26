@@ -376,7 +376,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "increase(huatuo_bamai_iolatency_disk_q2c{host=~\"$host\",region=\"$region\"}[5m])",
+              "expr": "increase(huatuo_bamai_iolatency_blkdisk_q2c{host=~\"$host\",region=\"$region\"}[5m])",
               "interval": "",
               "legendFormat": "{{host}},disk={{disk}} [zone={{zone}}]",
               "refId": "A"
@@ -474,7 +474,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "increase(huatuo_bamai_iolatency_disk_d2c{host=~\"$host\",region=\"$region\"}[5m])",
+              "expr": "increase(huatuo_bamai_iolatency_blkdisk_d2c{host=~\"$host\",region=\"$region\"}[5m])",
               "interval": "",
               "legendFormat": "{{host}},disk={{disk}} [zone={{zone}}]",
               "refId": "A"
@@ -572,9 +572,9 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "increase(huatuo_bamai_iolatency_disk_flush{host=~\"$host\",region=\"$region\"}[5m])",
+              "expr": "increase(huatuo_bamai_iolatency_blkdisk_freeze{host=~\"$host\",region=\"$region\"}[5m])",
               "interval": "",
-              "legendFormat": "{{host}},disk={{disk}} [{{latency}}]",
+              "legendFormat": "{{host}},disk={{disk}}",
               "refId": "A"
             }
           ],
@@ -685,7 +685,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "huatuo_bamai_vmstat_pgsteal_direct{host=~\"$host\",region=\"$region\"}/256",
+              "expr": "huatuo_bamai_memory_vmstat_pgsteal_direct{host=~\"$host\",region=\"$region\"}/256",
               "interval": "",
               "legendFormat": "{{host}}/{{container_host}}",
               "refId": "A"
@@ -784,7 +784,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "huatuo_bamai_vmstat_pgsteal_kswapd{host=~\"$host\",region=\"$region\"}/256",
+              "expr": "huatuo_bamai_memory_vmstat_pgsteal_kswapd{host=~\"$host\",region=\"$region\"}/256",
               "interval": "",
               "legendFormat": "{{host}}/{{container_host}}",
               "refId": "A"
@@ -883,7 +883,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "huatuo_bamai_vmstat_nr_dirty{host=~\"$host\",region=\"$region\"}/256",
+              "expr": "huatuo_bamai_memory_vmstat_nr_dirty{host=~\"$host\",region=\"$region\"}/256",
               "interval": "",
               "legendFormat": "{{host}}/{{container_host}}",
               "refId": "A"
@@ -982,7 +982,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "huatuo_bamai_vmstat_nr_writeback{host=~\"$host\",region=\"$region\"}/256",
+              "expr": "huatuo_bamai_memory_vmstat_nr_writeback{host=~\"$host\",region=\"$region\"}/256",
               "interval": "",
               "legendFormat": "{{host}}/{{container_host}}",
               "refId": "A"
@@ -1081,7 +1081,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "huatuo_bamai_vmstat_nr_free_pages{host=~\"$host\",region=\"$region\"}/256",
+              "expr": "huatuo_bamai_memory_vmstat_nr_free_pages{host=~\"$host\",region=\"$region\"}/256",
               "interval": "",
               "legendFormat": "{{host}}/{{container_host}}",
               "refId": "A"
@@ -1180,7 +1180,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "huatuo_bamai_vmstat_nr_inactive_file{host=~\"$host\",region=\"$region\"}/256 + huatuo_bamai_vmstat_nr_active_file{host=~\"$host\",region=\"$region\"}/256",
+              "expr": "huatuo_bamai_memory_vmstat_nr_inactive_file{host=~\"$host\",region=\"$region\"}/256 + huatuo_bamai_memory_vmstat_nr_active_file{host=~\"$host\",region=\"$region\"}/256",
               "interval": "",
               "legendFormat": "{{host}}/{{container_host}}",
               "refId": "A"
@@ -1279,7 +1279,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "huatuo_bamai_vmstat_nr_inactive_anon{host=~\"$host\",region=\"$region\"}/256 + huatuo_bamai_vmstat_nr_active_anon{host=~\"$host\",region=\"$region\"}/256",
+              "expr": "huatuo_bamai_memory_vmstat_nr_inactive_anon{host=~\"$host\",region=\"$region\"}/256 + huatuo_bamai_memory_vmstat_nr_active_anon{host=~\"$host\",region=\"$region\"}/256",
               "interval": "",
               "legendFormat": "{{host}}/{{container_host}}",
               "refId": "A"

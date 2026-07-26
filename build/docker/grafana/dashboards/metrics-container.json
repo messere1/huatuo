@@ -233,7 +233,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "increase(huatuo_bamai_iolatency_container_q2c{container_host=~\"$container_host\",region=\"$region\"}[5m])",
+              "expr": "increase(huatuo_bamai_iolatency_container_blkdisk_q2c{container_host=~\"$container_host\",region=\"$region\"}[5m])",
               "interval": "",
               "legendFormat": "{{container_host}} [zone={{zone}}]",
               "refId": "A"
@@ -336,7 +336,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "increase(huatuo_bamai_iolatency_container_d2c{container_host=~\"$container_host\",region=\"$region\"}[5m])",
+              "expr": "increase(huatuo_bamai_iolatency_container_blkdisk_d2c{container_host=~\"$container_host\",region=\"$region\"}[5m])",
               "interval": "",
               "legendFormat": "{{container_host}} [zone={{zone}}]",
               "range": true,
@@ -639,7 +639,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "huatuo_bamai_memory_stat_container_pgsteal_cswapd{container_host=~\"$container_host\",region=\"$region\"}/1024/1024",
+              "expr": "huatuo_bamai_memory_vmstat_container_pgsteal_cswapd{container_host=~\"$container_host\",region=\"$region\"}/1024/1024",
               "interval": "",
               "legendFormat": "{{host}}/{{container_host}}:{{container_type}}",
               "refId": "A"
@@ -735,7 +735,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "huatuo_bamai_memory_stat_container_pgsteal_direct{container_host=~\"$container_host\",region=\"$region\"}",
+              "expr": "huatuo_bamai_memory_vmstat_container_pgsteal_direct{container_host=~\"$container_host\",region=\"$region\"}",
               "interval": "",
               "legendFormat": "{{host}}/{{container_host}}:{{container_type}}",
               "refId": "A"
@@ -831,7 +831,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "huatuo_bamai_memory_stat_container_pgsteal_kswapd{container_host=~\"$container_host\",region=\"$region\"}",
+              "expr": "huatuo_bamai_memory_vmstat_container_pgsteal_kswapd{container_host=~\"$container_host\",region=\"$region\"}",
               "interval": "",
               "legendFormat": "{{host}}/{{container_host}}:{{container_type}}",
               "refId": "A"
@@ -927,7 +927,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "huatuo_bamai_memory_stat_container_pgsteal_globaldirect{container_host=~\"$container_host\",region=\"$region\"}",
+              "expr": "huatuo_bamai_memory_vmstat_container_pgsteal_globaldirect{container_host=~\"$container_host\",region=\"$region\"}",
               "interval": "",
               "legendFormat": "{{host}}/{{container_host}}:{{container_type}}",
               "refId": "A"
@@ -1022,7 +1022,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "huatuo_bamai_memory_stat_container_pgsteal_globalkswapd{container_host=~\"$container_host\",region=\"$region\"}",
+              "expr": "huatuo_bamai_memory_vmstat_container_pgsteal_globalkswapd{container_host=~\"$container_host\",region=\"$region\"}",
               "interval": "",
               "legendFormat": "{{host}}/{{container_host}}:{{container_type}}",
               "refId": "A"
@@ -2197,7 +2197,7 @@
                 "uid": "huatuo-bamai-prom"
               },
               "exemplar": true,
-              "expr": "rate(huatuo_bamai_netdev_contianer_transmit_carrier_total{container_host=~\"$container_host\",region=\"$region\"}[30s])",
+              "expr": "rate(huatuo_bamai_netdev_container_transmit_carrier_total{container_host=~\"$container_host\",region=\"$region\"}[30s])",
               "hide": false,
               "interval": "",
               "legendFormat": "carrier: {{container_host}}",
