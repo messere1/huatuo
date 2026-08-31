@@ -324,7 +324,7 @@ func TestConfigValidate(t *testing.T) {
 		},
 		{
 			name: "invalid Kafka topic",
-			mutate: func(cfg *BamaiConfig) {
+			mutate: func(cfg *Config) {
 				cfg.Storage.Kafka.Brokers = "127.0.0.1:9092"
 				cfg.Storage.Kafka.Topic = ""
 			},
